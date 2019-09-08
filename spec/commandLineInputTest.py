@@ -1,15 +1,19 @@
 import pytest
-from src.commandLineInput import *
+import sys
+import builtins
+
+from src.commandLineInput import CommandLineInput
 
 def test_canProvidePlateauDimensions(capsys):
     # Given
     commandLineInput = CommandLineInput()
+    samplePlateauDimension = "5,5"
     # When
+    builtins.input = lambda: samplePlateauDimension
     commandLineInput.startReceivingCommands()
-
-    # Then
     printedOutput = capsys.readouterr().out
-    expectedPlateaInputInstructions = "Provide Plateau dimensions in the following format: maxCoordinateInX, maxCoordinateInY e.g : 5,5"
-    assert printedOutput == expectedPlateaInputInstructions + "\n"
-
+    # Then
+    expectedPlateauInputInstructions = "Provide Plateau dimension in this format: maxCoordinateX,maxCoordinateY e.g:5,5"
+    assert printedOutput == expectedPlateauInputInstructions + "\n"
+    assert commandLineInput.getPlateauDimension() == samplePlateauDimension
 
