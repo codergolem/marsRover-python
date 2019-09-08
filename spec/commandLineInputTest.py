@@ -1,8 +1,9 @@
 import pytest
+from src.commandLineInput import *
 
 def test_canProvidePlateauDimensions(capsys):
     # Given
-    commandLineInput = commandLineInput()
+    commandLineInput = CommandLineInput()
     # When
     commandLineInput.startReceivingCommands()
 
