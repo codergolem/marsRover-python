@@ -20,7 +20,7 @@ class CommandLineInput:
         initialPositionInRoverFormat  = initialPositionInRawFormat.split()
 
         rover = Rover(plateauDimensionInRawFormat,initialPositionInRawFormat)
-        rover.move(movementCommandInRawFormat)
+        rover.processCommands(movementCommandInRawFormat)
         print(rover.getCurrentPosition())
 
     def getPlateauDimension(self):
