@@ -20,7 +20,14 @@ class Rover:
         return [self.currentCoordinates[0], self.currentCoordinates[1], self.currentOrientation]
 
     def turnLeft(self):
-        return RoverPosition(self.currentCoordinates[0], self.currentCoordinates[1], self.currentOrientation)
+        nextOrientationMapping = {
+            "N": "W",
+            "W": "S",
+            "S": "E",
+            "E": "N"
+        }
+        nextOrientation = nextOrientationMapping.get(self.currentOrientation, "Invalid orientation provided")
+        return RoverPosition(self.currentCoordinates[0], self.currentCoordinates[1], nextOrientation)
 
 
 class RoverPosition:
