@@ -3,11 +3,9 @@ from src.roverPosition import RoverPosition
 
 
 class Rover:
-
     plateauDimensions: List[int]
     currentPosition: RoverPosition
 
-    # TODO: Validate initial position according to Plateau dimensions
     def __init__(self, plateauDimensions, initialPosition: RoverPosition):
         if not self.isPositionWithinPlateauArea(plateauDimensions, initialPosition):
             raise ValueError('rover initial position out of plateau area')
@@ -70,12 +68,14 @@ class Rover:
                                        self.currentPosition.getCoordinateInY(),
                                        self.currentPosition.getOrientation())
         }
-        calculateNewRoverPosition = moveMappingTable.get(self.currentPosition.getOrientation(), lambda: RoverPosition(0, 0, "X"))
-        self.currentPosition = calculateNewRoverPosition()
+        newRoverPosition = moveMappingTable.get(self.currentPosition.getOrientation(),
+                                                lambda: RoverPosition(0, 0, "X"))()
+        if not self.isPositionWithinPlateauArea(self.plateauDimensions, newRoverPosition):
+            raise ValueError('rover cannot be driven out of plateau area')
+        self.currentPosition = newRoverPosition
         return self.currentPosition
 
     def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
         if (position.getCoordinateInX() > plateau[0]) or (position.getCoordinateInY() > plateau[1]):
             return False
         return True
-

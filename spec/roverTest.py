@@ -2,6 +2,7 @@ from src.rover import Rover
 from src.rover import RoverPosition
 import pytest
 
+
 class Test_Rover:
 
     def test_RoverCanMoveToPosition(self):
@@ -24,3 +25,13 @@ class Test_Rover:
         with pytest.raises(ValueError, match='rover initial position out of plateau area'):
             rover = Rover(plateau, initialPosition)
 
+    def test_CannotMoveRoverOutOfPlateau(self):
+        # Given
+        initialPosition = RoverPosition(2, 2, "N")
+        plateau = [3, 3]
+        movementCommands = ["M", "M", "M"]
+        rover = Rover(plateau, initialPosition)
+        # Then
+        with pytest.raises(ValueError, match='rover cannot be driven out of plateau area'):
+            rover.processCommands(movementCommands)
+        assert rover.getCurrentPosition().toString() == RoverPosition(2, 3, 'N').toString()
