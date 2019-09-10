@@ -8,11 +8,11 @@ class Rover:
     currentPosition: RoverPosition
 
     # TODO: Validate initial position according to Plateau dimensions
-    def __init__(self, plateauDimensions, initialPosition):
+    def __init__(self, plateauDimensions, initialPosition: RoverPosition):
         if not self.isPositionWithinPlateauArea(plateauDimensions, initialPosition):
             raise ValueError('rover initial position out of plateau area')
         self.plateauDimensions = plateauDimensions
-        self.currentPosition = RoverPosition(initialPosition[0], initialPosition[1], initialPosition[2])
+        self.currentPosition = initialPosition
 
     def processCommands(self, commands: List[str]):
 
@@ -74,8 +74,8 @@ class Rover:
         self.currentPosition = calculateNewRoverPosition()
         return self.currentPosition
 
-    def isPositionWithinPlateauArea(self, plateau, position):
-        if (position[0] > plateau[0]) or (position[1] > plateau[1]):
+    def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
+        if (position.getCoordinateInX() > plateau[0]) or (position.getCoordinateInY() > plateau[1]):
             return False
         return True
 

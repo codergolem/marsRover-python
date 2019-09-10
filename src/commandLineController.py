@@ -1,5 +1,5 @@
 from src.rover import Rover
-
+from src.rover import RoverPosition
 
 class CommandLineController:
 
@@ -8,6 +8,7 @@ class CommandLineController:
     textToAskForRoverMovementCommands = "Provide commands to move Rover:"
 
     # TODO: Validate user input
+    # TODO: Use list comprehension for transforming user input
     def startReceivingCommands(self):
         print(self.textToAskForPlateauDimension)
         plateauDimension = input().split()
@@ -15,11 +16,8 @@ class CommandLineController:
         plateauCoordinateInY = int(plateauDimension[1])
         plateauDimension = [plateauCoordinateInX, plateauCoordinateInY]
         print(self.textToAskForInitialPosition)
-        initialPosition = input().split()
-        initialCoordinateInX = int(initialPosition[0])
-        initialCoordinateInY = int(initialPosition[1])
-        initialOrientation = initialPosition[2]
-        initialPosition = [initialCoordinateInX, initialCoordinateInY, initialOrientation]
+        initialPositionList = input().split()
+        initialPosition = RoverPosition(int(initialPositionList[0]), int(initialPositionList[1]), initialPositionList[2])
         print(self.textToAskForRoverMovementCommands)
         movementCommands = list(input())
         # TODO: Test that the valuerror exception corresponds to the actual invalid input
