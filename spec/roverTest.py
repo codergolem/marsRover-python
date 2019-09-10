@@ -1,6 +1,5 @@
 from src.rover import Rover
-from src.rover import RoverPosition
-
+import pytest
 
 class Test_Rover:
 
@@ -10,17 +9,18 @@ class Test_Rover:
         plateau = [5, 5]
         movementCommands = ["M", "R", "M", "L", "M"]
         rover = Rover(plateau, initialPosition)
+        # When
         rover.processCommands(movementCommands)
+        # Then
         expectedFinalPosition = '3 4 N'
         assert rover.getCurrentPosition().toString() == expectedFinalPosition
 
-    def test_RoverTurnLeft(self):
-        #Given
-        initialPosition = [2, 2, "N"]
+    def test_CannotCreateRoverIfInitialPositionOutOfPlateauArea(self):
+        print("test")
+        # Given
         plateau = [5, 5]
-        rover = Rover(plateau, initialPosition)
-        # When
-        currentRoverPosition: RoverPosition = rover.turnLeft()
+        initialPosition = [6, 5, 'N']
         # Then
-        expectedRoverPosition = RoverPosition(2, 2, "W")
-        assert currentRoverPosition.toString() == expectedRoverPosition.toString()
+        with pytest.raises(ValueError, match='rover initial position out of plateau area'):
+            rover = Rover(plateau, initialPosition)
+
