@@ -1,21 +1,20 @@
-from src.rover import RoverPosition
 from mock import patch, mock_open
 from src.inputFileController import InputFileController
 
 class Test_InputFileController:
 
-    def test_shouldCalculateFinalPositionForOneRover(self, mocker):
+    def test_shouldCalculateFinalPositionForOneRover(self, mocker, capsys):
         # Given
-        # inputFileController = InputFileController()
         filePath = 'somePathToFile/file.txt'
-        mockedFileContent = '3 3\n2 2 N'
-        expectedInitialPosition = RoverPosition(2, 2, "N")
-        expectedPlateau = [3, 3]
+        mockedFileContent = '5 5\n3 3 E\nMMRMMRMRRM'
 
-        mockedRover = mocker.patch('src.rover.Rover', autospec=True)
-
+        # When
         with patch('builtins.open', mock_open(read_data=mockedFileContent)):
             inputFileController = InputFileController()
             inputFileController.processFile(filePath)
 
-        mockedRover.assert_called_with(expectedPlateau, expectedInitialPosition)
+        # Then
+        printedOutput = capsys.readouterr().out
+        lastPrintedLine = printedOutput.replace('\n', '')
+        expectedFinalPosition = "5 1 E"
+        assert lastPrintedLine == expectedFinalPosition

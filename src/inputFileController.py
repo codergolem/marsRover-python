@@ -9,6 +9,7 @@ class InputFileController:
         with open(filePath, 'rb') as inputFile:
             plateauAsListOfStrings = inputFile.readline().split()
             roverInitialPositionAsList = inputFile.readline().split()
+            commandsToMoveRover = list(inputFile.readline())
 
         plateauCoordinateInX = int(plateauAsListOfStrings[0])
         plateauCoordinateInY = int(plateauAsListOfStrings[1])
@@ -18,4 +19,7 @@ class InputFileController:
                                              int(roverInitialPositionAsList[1]),
                                              str(roverInitialPositionAsList[2]))
 
-        rover = src.rover.Rover(plateau, roverInitialPosition)
+        rover = Rover(plateau, roverInitialPosition)
+        rover.processCommands(commandsToMoveRover)
+
+        print(rover.getCurrentPosition().toString())

@@ -1,12 +1,13 @@
 import pytest
 from src.inputFileController import InputFileController
+from src.rover import Rover
 
 def test_shouldCalculateFinalPositionForTwoRovers(capsys):
     # Given
     inputFilePath = 'testFiles/inputFile.txt'
     inputFileController = InputFileController()
     # When
-    inputFileController.read(inputFilePath)
+    inputFileController.executeCommands(inputFilePath)
     printedOutput = capsys.readouterr().out.replace('\n', '')
     # Then
     expectedRoversFinalPositions = '1 3 N' + '\n' + '5 1 E' + '\n'
