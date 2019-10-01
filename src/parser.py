@@ -2,6 +2,7 @@ from src.rover import RoverPosition, Rover
 from src.plateau import Plateau
 from src.roverInstruction import RoverInstruction
 from src.setOfInstructions import SetOfInstructions
+from src.orientation import Orientation
 
 class Parser:
 
@@ -14,9 +15,10 @@ class Parser:
             for lineCount, line in enumerate(inputFile, 1):
                 if lineCount % 2 != 0:
                     roverInitialPositionAsList = line.split()
+                    orientation = Orientation(roverInitialPositionAsList[2])
                     roverInitialPosition = RoverPosition(int(roverInitialPositionAsList[0]),
                                                          int(roverInitialPositionAsList[1]),
-                                                         str(roverInitialPositionAsList[2]))
+                                                         orientation)
                 else:
                     commandsToMoveRover = list(line)
                     roverInstruction = RoverInstruction(roverInitialPosition, commandsToMoveRover)

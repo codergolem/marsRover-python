@@ -1,6 +1,7 @@
 from typing import List
 from src.roverPosition import RoverPosition
 from src.plateau import Plateau
+from src.orientation import Orientation
 
 
 class Rover:
@@ -28,10 +29,10 @@ class Rover:
 
     def turnLeft(self):
         leftOrientationMapping = {
-            "N": "W",
-            "W": "S",
-            "S": "E",
-            "E": "N"
+            Orientation.NORTH: Orientation.WEST,
+            Orientation.WEST: Orientation.SOUTH,
+            Orientation.SOUTH: Orientation.EAST,
+            Orientation.EAST: Orientation.NORTH
         }
         newOrientation = leftOrientationMapping.get(self.currentPosition.getOrientation(), "X")
         newPosition = RoverPosition(self.currentPosition.getCoordinateInX(),
@@ -42,10 +43,10 @@ class Rover:
 
     def turnRight(self):
         rightOrientationMapping = {
-            "N": "E",
-            "W": "N",
-            "S": "W",
-            "E": "S"
+            Orientation.NORTH: Orientation.EAST,
+            Orientation.WEST: Orientation.NORTH,
+            Orientation.SOUTH: Orientation.WEST,
+            Orientation.EAST: Orientation.SOUTH
         }
         newOrientation = rightOrientationMapping.get(self.currentPosition.getOrientation(), "X")
         newPosition = RoverPosition(self.currentPosition.getCoordinateInX(),
@@ -56,27 +57,28 @@ class Rover:
 
     def move(self):
         moveMappingTable = {
-            "N": lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
-                                       self.currentPosition.getCoordinateInY() + 1,
-                                       self.currentPosition.getOrientation()),
-            "S": lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
-                                       self.currentPosition.getCoordinateInY() - 1,
-                                       self.currentPosition.getOrientation()),
-            "W": lambda: RoverPosition(self.currentPosition.getCoordinateInX() - 1,
-                                       self.currentPosition.getCoordinateInY(),
-                                       self.currentPosition.getOrientation()),
-            "E": lambda: RoverPosition(self.currentPosition.getCoordinateInX() + 1,
-                                       self.currentPosition.getCoordinateInY(),
-                                       self.currentPosition.getOrientation())
+            Orientation.NORTH: lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
+                                                     self.currentPosition.getCoordinateInY() + 1,
+                                                     self.currentPosition.getOrientation()),
+            Orientation.SOUTH: lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
+                                                     self.currentPosition.getCoordinateInY() - 1,
+                                                     self.currentPosition.getOrientation()),
+            Orientation.WEST: lambda: RoverPosition(self.currentPosition.getCoordinateInX() - 1,
+                                                    self.currentPosition.getCoordinateInY(),
+                                                    self.currentPosition.getOrientation()),
+            Orientation.EAST: lambda: RoverPosition(self.currentPosition.getCoordinateInX() + 1,
+                                                    self.currentPosition.getCoordinateInY(),
+                                                    self.currentPosition.getOrientation())
         }
         newRoverPosition = moveMappingTable.get(self.currentPosition.getOrientation(),
-                                                lambda: RoverPosition(0, 0, "X"))()
+                                                lambda: RoverPosition(0, 0, Orientation.SOUTH))()
         if not self.isPositionWithinPlateauArea(self.plateau, newRoverPosition):
             raise ValueError('rover cannot be driven out of plateau area')
         self.currentPosition = newRoverPosition
         return self.currentPosition
 
     def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
-        if (position.getCoordinateInX() > plateau.getDimensionInX()) or (position.getCoordinateInY() > plateau.getDimensionInY()):
+        if (position.getCoordinateInX() > plateau.getDimensionInX()) or (
+                position.getCoordinateInY() > plateau.getDimensionInY()):
             return False
         return True
