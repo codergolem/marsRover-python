@@ -1,7 +1,10 @@
 from mock import patch, mock_open
 from src.inputFileController import InputFileController
+from src.parser import Parser
 
 class Test_InputFileController:
+
+    parser = Parser()
 
     def test_shouldCalculateFinalPositionForOneRover(self, mocker, capsys):
         # Given
@@ -11,7 +14,7 @@ class Test_InputFileController:
         # When
         with patch('builtins.open', mock_open(read_data=mockedFileContent)):
             inputFileController = InputFileController()
-            inputFileController.processFile(filePath)
+            inputFileController.processFile(filePath, self.parser)
 
         # Then
         printedOutput = capsys.readouterr().out
@@ -29,7 +32,7 @@ class Test_InputFileController:
 
         # When
         with patch('builtins.open', mock_open(read_data=mockedFileContent)):
-            inputFileController2.processFile(filePath)
+            inputFileController2.processFile(filePath, self.parser)
 
         # Then
         printedOutput = capsys.readouterr().out

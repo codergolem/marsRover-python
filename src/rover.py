@@ -1,15 +1,16 @@
 from typing import List
 from src.roverPosition import RoverPosition
+from src.plateau import Plateau
 
 
 class Rover:
-    plateauDimensions: List[int]
+    plateau: Plateau
     currentPosition: RoverPosition
 
-    def __init__(self, plateauDimensions, initialPosition: RoverPosition):
-        if not self.isPositionWithinPlateauArea(plateauDimensions, initialPosition):
+    def __init__(self, plateau, initialPosition: RoverPosition):
+        if not self.isPositionWithinPlateauArea(plateau, initialPosition):
             raise ValueError('rover initial position out of plateau area')
-        self.plateauDimensions = plateauDimensions
+        self.plateau = plateau
         self.currentPosition = initialPosition
 
     def processCommands(self, commands: List[str]):
@@ -70,12 +71,12 @@ class Rover:
         }
         newRoverPosition = moveMappingTable.get(self.currentPosition.getOrientation(),
                                                 lambda: RoverPosition(0, 0, "X"))()
-        if not self.isPositionWithinPlateauArea(self.plateauDimensions, newRoverPosition):
+        if not self.isPositionWithinPlateauArea(self.plateau, newRoverPosition):
             raise ValueError('rover cannot be driven out of plateau area')
         self.currentPosition = newRoverPosition
         return self.currentPosition
 
     def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
-        if (position.getCoordinateInX() > plateau[0]) or (position.getCoordinateInY() > plateau[1]):
+        if (position.getCoordinateInX() > plateau.getDimensionInX()) or (position.getCoordinateInY() > plateau.getDimensionInY()):
             return False
         return True
