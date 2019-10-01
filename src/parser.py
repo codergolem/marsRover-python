@@ -3,12 +3,20 @@ from src.plateau import Plateau
 from src.roverInstruction import RoverInstruction
 from src.setOfInstructions import SetOfInstructions
 from src.orientation import Orientation
+from src.ParsingError import ParsingError
+
 
 class Parser:
+    # TODO: Handle exception if coordinate or plateau are not int
+    # TODO: Make movement command a ENUM and handle exception
+    # TODO: Handle exception if orientation is not one of the valid enums
 
     def parseFile(self, filePath):
         with open(filePath, 'r') as inputFile:
             plateauAsListOfStrings = inputFile.readline().split()
+            if not (str.isdigit(plateauAsListOfStrings[0]) and str.isdigit(plateauAsListOfStrings[1])):
+                raise ParsingError("Invalid plateau dimensions")
+
             plateau = Plateau(int(plateauAsListOfStrings[0]), int(plateauAsListOfStrings[1]))
             roverInstructions = []
 

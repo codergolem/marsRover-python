@@ -1,5 +1,5 @@
 from src.rover import Rover
-
+from src.ParsingError import ParsingError
 
 class InputFileController:
 
@@ -7,9 +7,12 @@ class InputFileController:
         self.rovers = []
 
     def processFile(self, filePath, parser):
-        setOfInstructions = parser.parseFile(filePath)
+        try:
+            setOfInstructions = parser.parseFile(filePath)
+            for instruction in setOfInstructions.getRoverInstructions():
+                rover = Rover(setOfInstructions.plateau, instruction.getInitialPosition())
+                rover.processCommands(instruction.getMovementCommands())
+                print(rover.getCurrentPosition().toString())
 
-        for instruction in setOfInstructions.getRoverInstructions():
-            rover = Rover(setOfInstructions.plateau, instruction.getInitialPosition())
-            rover.processCommands(instruction.getMovementCommands())
-            print(rover.getCurrentPosition().toString())
+        except ParsingError as error:
+            print(error)
