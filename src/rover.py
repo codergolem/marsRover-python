@@ -2,6 +2,7 @@ from typing import List
 from src.roverPosition import RoverPosition
 from src.plateau import Plateau
 from src.orientation import Orientation
+from src.movementCommand import MovementCommand
 
 
 class Rover:
@@ -14,14 +15,14 @@ class Rover:
         self.plateau = plateau
         self.currentPosition = initialPosition
 
-    def processCommands(self, commands: List[str]):
+    def processCommands(self, commands: List[MovementCommand]):
 
         for command in commands:
-            if command == 'M':
+            if command == MovementCommand.FORWARD:
                 self.move()
-            if command == 'R':
+            if command == MovementCommand.RIGHT:
                 self.turnRight()
-            if command == 'L':
+            if command == MovementCommand.LEFT:
                 self.turnLeft()
 
     def getCurrentPosition(self) -> RoverPosition:

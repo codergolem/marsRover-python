@@ -4,10 +4,10 @@ from src.roverInstruction import RoverInstruction
 from src.setOfInstructions import SetOfInstructions
 from src.orientation import Orientation
 from src.ParsingError import ParsingError
+from src.movementCommand import MovementCommand
 
 
 class Parser:
-    # TODO: Make movement command a ENUM and handle exception
 
     def parseFile(self, filePath):
         with open(filePath, 'r') as inputFile:
@@ -29,7 +29,7 @@ class Parser:
                                                          int(roverInitialPositionAsList[1]),
                                                          orientation)
                 else:
-                    commandsToMoveRover = list(line)
+                    commandsToMoveRover = [MovementCommand(command) for command in list(line.replace('\n', ''))]
                     roverInstruction = RoverInstruction(roverInitialPosition, commandsToMoveRover)
                     roverInstructions.append(roverInstruction)
 
