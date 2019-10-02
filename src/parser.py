@@ -8,7 +8,6 @@ from src.ParsingError import ParsingError
 
 class Parser:
     # TODO: Make movement command a ENUM and handle exception
-    # TODO: Handle exception if orientation is not one of the valid enums
 
     def parseFile(self, filePath):
         with open(filePath, 'r') as inputFile:

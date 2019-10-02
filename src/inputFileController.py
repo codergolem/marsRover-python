@@ -16,3 +16,5 @@ class InputFileController:
 
         except ParsingError as error:
             print(error)
+        except ValueError as error:
+            print(error)
