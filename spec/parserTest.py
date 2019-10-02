@@ -1,5 +1,4 @@
 from mock import patch, mock_open
-from src.inputfilecontroller import InputFileController
 from src.parser import Parser
 from src.setofinstructions import SetOfInstructions
 from src.plateau import Plateau
@@ -9,6 +8,7 @@ from src.orientation import Orientation
 from src.movementcommand import MovementCommand
 from src.parsingerror import ParsingError
 import pytest
+
 
 class Test_Parser:
 
