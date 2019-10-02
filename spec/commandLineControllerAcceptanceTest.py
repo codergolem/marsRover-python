@@ -1,5 +1,5 @@
 import builtins
-from src.commandLineController import CommandLineController
+from src.commandlinecontroller import CommandLineController
 
 
 class Test_MarsRoverAcceptanceTest:

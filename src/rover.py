@@ -1,8 +1,8 @@
 from typing import List
-from src.roverPosition import RoverPosition
+from src.position import RoverPosition
 from src.plateau import Plateau
 from src.orientation import Orientation
-from src.movementCommand import MovementCommand
+from src.movementcommand import MovementCommand
 
 
 class Rover:

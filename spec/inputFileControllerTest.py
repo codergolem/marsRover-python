@@ -1,5 +1,5 @@
 from mock import patch, mock_open
-from src.inputFileController import InputFileController
+from src.inputfilecontroller import InputFileController
 from src.parser import Parser
 
 class Test_InputFileController:

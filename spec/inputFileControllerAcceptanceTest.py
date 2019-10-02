@@ -1,5 +1,5 @@
 import pytest
-from src.inputFileController import InputFileController
+from src.inputfilecontroller import InputFileController
 from src.rover import Rover
 from src.parser import Parser
 

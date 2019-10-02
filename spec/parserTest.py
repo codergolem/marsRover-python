@@ -1,13 +1,13 @@
 from mock import patch, mock_open
-from src.inputFileController import InputFileController
+from src.inputfilecontroller import InputFileController
 from src.parser import Parser
-from src.setOfInstructions import SetOfInstructions
+from src.setofinstructions import SetOfInstructions
 from src.plateau import Plateau
-from src.roverInstruction import RoverInstruction
-from src.roverPosition import RoverPosition
+from src.instruction import RoverInstruction
+from src.position import RoverPosition
 from src.orientation import Orientation
-from src.movementCommand import MovementCommand
-from src.ParsingError import ParsingError
+from src.movementcommand import MovementCommand
+from src.parsingerror import ParsingError
 import pytest
 
 class Test_Parser:
