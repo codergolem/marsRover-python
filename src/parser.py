@@ -7,7 +7,6 @@ from src.ParsingError import ParsingError
 
 
 class Parser:
-    # TODO: Handle exception if coordinate or plateau are not int
     # TODO: Make movement command a ENUM and handle exception
     # TODO: Handle exception if orientation is not one of the valid enums
 
@@ -24,6 +23,9 @@ class Parser:
                 if lineCount % 2 != 0:
                     roverInitialPositionAsList = line.split()
                     orientation = Orientation(roverInitialPositionAsList[2])
+                    if not (str.isdigit(roverInitialPositionAsList[0]) and str.isdigit(roverInitialPositionAsList[1])):
+                        raise ParsingError("Invalid rover initial position")
+
                     roverInitialPosition = RoverPosition(int(roverInitialPositionAsList[0]),
                                                          int(roverInitialPositionAsList[1]),
                                                          orientation)

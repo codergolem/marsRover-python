@@ -54,3 +54,19 @@ class Test_InputFileController:
         printedOutput = capsys.readouterr().out
         errorMessage = "Invalid plateau dimensions\n"
         assert printedOutput == errorMessage
+
+    def test_shouldPrintAnErrorWhenRoverInitialPositionIsNotValid(self, capsys):
+        # Given
+        filePath = 'somePathToFile/file.txt'
+        mockedFileContent = '5 5\n3 s E\nMMRMMRMRRM\n2 2 N\nMRMLM\n1 1 N\nM'
+
+        inputFileController = InputFileController()
+
+        # When
+        with patch('builtins.open', mock_open(read_data=mockedFileContent)):
+            inputFileController.processFile(filePath, self.parser)
+
+        # Then
+        printedOutput = capsys.readouterr().out
+        errorMessage = "Invalid rover initial position\n"
+        assert printedOutput == errorMessage
