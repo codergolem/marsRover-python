@@ -22,7 +22,6 @@ class Test_InputFileController:
         expectedFinalPosition = "5 1 E"
         assert lastPrintedLine == expectedFinalPosition
 
-
     def test_shouldCalculateFinalPositionForThreeeRovers(self, mocker, capsys):
         # Given
         filePath = 'somePathToFile/file.txt'

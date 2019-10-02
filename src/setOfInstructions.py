@@ -9,3 +9,12 @@ class SetOfInstructions:
 
     def getRoverInstructions(self):
         return self.roverInstructions
+
+    def toString(self):
+        plateauAsString = str(self.plateau.getDimensionInX()) + ' ' + str(self.plateau.getDimensionInY()) + '\n'
+        roverInstructionsAsStrings = []
+        for instruction in self.roverInstructions:
+            movementCommandsAsString = ''.join([command.value for command in instruction.getMovementCommands()])
+            instructionAsString = instruction.getInitialPosition().toString() + '\n' + movementCommandsAsString
+            roverInstructionsAsStrings.append(instructionAsString)
+        return plateauAsString + '\n'.join(roverInstructionsAsStrings)

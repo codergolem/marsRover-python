@@ -1,6 +1,7 @@
 from src.rover import Rover
 from src.ParsingError import ParsingError
 
+
 class InputFileController:
 
     def __init__(self):
@@ -13,7 +14,6 @@ class InputFileController:
                 rover = Rover(setOfInstructions.plateau, instruction.getInitialPosition())
                 rover.processCommands(instruction.getMovementCommands())
                 print(rover.getCurrentPosition().toString())
-
         except ParsingError as error:
             print(error)
         except ValueError as error:
