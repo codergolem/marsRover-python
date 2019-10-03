@@ -6,8 +6,6 @@ from src.movementcommand import MovementCommand
 
 
 class Rover:
-    plateau: Plateau
-    currentPosition: RoverPosition
 
     def __init__(self, plateau, initialPosition: RoverPosition):
         if not self.isPositionWithinPlateauArea(plateau, initialPosition):

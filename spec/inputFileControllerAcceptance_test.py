@@ -1,13 +1,11 @@
-import pytest
 from src.inputfilecontroller import InputFileController
-from src.rover import Rover
 from src.parser import Parser
 
 
 def test_shouldCalculateFinalPositionForTwoRovers(capsys):
     parser = Parser()
     # Given
-    inputFilePath = 'testFiles/inputFile.txt'
+    inputFilePath = 'spec/testFiles/inputFile.txt'
     inputFileController = InputFileController()
     # When
     inputFileController.processFile(inputFilePath, parser)
