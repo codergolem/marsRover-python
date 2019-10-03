@@ -6,7 +6,7 @@ class Test_InputFileController:
 
     parser = Parser()
 
-    def test_shouldCalculateFinalPositionForOneRover(self, mocker, capsys):
+    def test_shouldCalculateFinalPositionForOneRover(self, capsys):
         # Given
         filePath = 'somePathToFile/file.txt'
         mockedFileContent = '5 5\n3 3 E\nMMRMMRMRRM'
@@ -22,7 +22,7 @@ class Test_InputFileController:
         expectedFinalPosition = "5 1 E"
         assert lastPrintedLine == expectedFinalPosition
 
-    def test_shouldCalculateFinalPositionForThreeeRovers(self, mocker, capsys):
+    def test_shouldCalculateFinalPositionForThreeeRovers(self, capsys):
         # Given
         filePath = 'somePathToFile/file.txt'
         mockedFileContent = '5 5\n3 3 E\nMMRMMRMRRM\n2 2 N\nMRMLM\n1 1 N\nM'
