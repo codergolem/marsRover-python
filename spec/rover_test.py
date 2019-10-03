@@ -1,8 +1,8 @@
-from src.rover import Rover
-from src.position import RoverPosition
-from src.orientation import Orientation
-from src.plateau import Plateau
-from src.movementcommand import MovementCommand
+from marsrover.rover import Rover
+from marsrover.position import RoverPosition
+from marsrover.orientation import Orientation
+from marsrover.plateau import Plateau
+from marsrover.movementcommand import MovementCommand
 import pytest
 
 

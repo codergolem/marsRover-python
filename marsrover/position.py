@@ -1,4 +1,4 @@
-from src.orientation import Orientation
+from marsrover.orientation import Orientation
 
 
 class RoverPosition:

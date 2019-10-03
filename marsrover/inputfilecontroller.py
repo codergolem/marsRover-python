@@ -1,5 +1,5 @@
-from src.rover import Rover
-from src.parsingerror import ParsingError
+from marsrover.rover import Rover
+from marsrover.parsingerror import ParsingError
 
 
 class InputFileController:

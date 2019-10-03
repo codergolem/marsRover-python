@@ -1,5 +1,5 @@
-from src.inputfilecontroller import InputFileController
-from src.parser import Parser
+from marsrover.inputfilecontroller import InputFileController
+from marsrover.parser import Parser
 
 
 def test_shouldCalculateFinalPositionForTwoRovers(capsys):

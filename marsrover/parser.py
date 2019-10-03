@@ -1,10 +1,10 @@
-from src.rover import RoverPosition, Rover
-from src.plateau import Plateau
-from src.instruction import RoverInstruction
-from src.setofinstructions import SetOfInstructions
-from src.orientation import Orientation
-from src.parsingerror import ParsingError
-from src.movementcommand import MovementCommand
+from marsrover.rover import RoverPosition, Rover
+from marsrover.plateau import Plateau
+from marsrover.instruction import RoverInstruction
+from marsrover.setofinstructions import SetOfInstructions
+from marsrover.orientation import Orientation
+from marsrover.parsingerror import ParsingError
+from marsrover.movementcommand import MovementCommand
 
 
 class Parser:
