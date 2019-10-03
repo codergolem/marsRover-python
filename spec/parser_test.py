@@ -46,7 +46,19 @@ class Test_Parser:
             with patch('builtins.open', mock_open(read_data=mockedFileContent)):
                 parser.parseFile(filePath)
 
-    def test_shouldRaiseExceptionWhenRoverInitialPositionIsNotValid(self, capsys):
+    def test_shouldRaiseExceptionWhenPlateauDimensionsAreNotExactlyTwo(self):
+        # Given
+        filePath = 'somePathToFile/file.txt'
+        mockedFileContent = 'hjhkjj\n3 3 E\nMMRMMRMRRM'
+
+        parser = Parser()
+
+        # Then
+        with pytest.raises(ParsingError, match='Invalid plateau dimensions'):
+            with patch('builtins.open', mock_open(read_data=mockedFileContent)):
+                parser.parseFile(filePath)
+
+    def test_shouldRaiseExceptionWhenInitialPositionIsNotValid(self, capsys):
         # Given
         filePath = 'somePathToFile/file.txt'
         mockedFileContent = '5 5\n3 s E\nMMRMMRMRRM\n2 2 N\nMRMLM\n1 1 N\nM'
@@ -58,7 +70,31 @@ class Test_Parser:
             with patch('builtins.open', mock_open(read_data=mockedFileContent)):
                 parser.parseFile(filePath)
 
-    def test_shouldRaiseExceptionWhenRoverInitialOrientationIsNotValid(self, capsys):
+    def test_shouldRaiseExceptionWhenInitialPositionIsNotExactlyThreeValues(self, capsys):
+        # Given
+        filePath = 'somePathToFile/file.txt'
+        mockedFileContent = '5 5\n3 3\nMMRMMRMRRM\n2 2 N\nMRMLM\n1 1 N\nM'
+
+        parser = Parser()
+
+        # Then
+        with pytest.raises(ParsingError, match='Invalid rover initial position'):
+            with patch('builtins.open', mock_open(read_data=mockedFileContent)):
+                parser.parseFile(filePath)
+
+    def test_shouldRaiseExceptionIfPlateauDimensionsAreNotExactlyTwo(self):
+        # Given
+        filePath = 'somePathToFile/file.txt'
+        mockedFileContent = '5\n3 3 E\nMMRMMRMRRM'
+
+        parser = Parser()
+
+        # Then
+        with pytest.raises(ParsingError, match='Invalid plateau dimensions'):
+            with patch('builtins.open', mock_open(read_data=mockedFileContent)):
+                parser.parseFile(filePath)
+
+    def test_shouldRaiseExceptionWhenInitialOrientationIsNotValid(self, capsys):
         # Given
         filePath = 'somePathToFile/file.txt'
         mockedFileContent = '5 5\n3 3 X\nMMRMMRMRRM\n2 2 N\nMRMLM\n1 1 N\nM'

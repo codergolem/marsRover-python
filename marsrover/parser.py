@@ -12,7 +12,9 @@ class Parser:
     def parseFile(self, filePath):
         with open(filePath, 'r') as inputFile:
             plateauAsListOfStrings = inputFile.readline().split()
-            if not (str.isdigit(plateauAsListOfStrings[0]) and str.isdigit(plateauAsListOfStrings[1])):
+            if not ((len(plateauAsListOfStrings) == 2) and
+                    str.isdigit(plateauAsListOfStrings[0]) and
+                    str.isdigit(plateauAsListOfStrings[1])):
                 raise ParsingError("Invalid plateau dimensions")
 
             plateau = Plateau(int(plateauAsListOfStrings[0]), int(plateauAsListOfStrings[1]))
@@ -21,9 +23,12 @@ class Parser:
             for lineCount, line in enumerate(inputFile, 1):
                 if lineCount % 2 != 0:
                     roverInitialPositionAsList = line.split()
-                    orientation = Orientation(roverInitialPositionAsList[2])
-                    if not (str.isdigit(roverInitialPositionAsList[0]) and str.isdigit(roverInitialPositionAsList[1])):
+                    if not ((len(roverInitialPositionAsList) == 3) and
+                            str.isdigit(roverInitialPositionAsList[0]) and
+                            str.isdigit(roverInitialPositionAsList[1])):
                         raise ParsingError("Invalid rover initial position")
+
+                    orientation = Orientation(roverInitialPositionAsList[2])
 
                     roverInitialPosition = RoverPosition(int(roverInitialPositionAsList[0]),
                                                          int(roverInitialPositionAsList[1]),
