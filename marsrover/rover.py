@@ -76,7 +76,7 @@ class Rover:
         return self.currentPosition
 
     def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
-        if (position.getCoordinateInX() > plateau.getDimensionInX()) or (
+        if (position.getCoordinateInX() > plateau.getDimensionInX() or
                 position.getCoordinateInY() > plateau.getDimensionInY()):
             return False
         return True
