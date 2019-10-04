@@ -22,9 +22,6 @@ class Rover:
             if command == MovementCommand.LEFT:
                 self.turnLeft()
 
-    def getCurrentPosition(self) -> RoverPosition:
-        return self.currentPosition
-
     def turnLeft(self):
         leftOrientationMapping = {
             Orientation.NORTH: Orientation.WEST,
@@ -32,9 +29,9 @@ class Rover:
             Orientation.SOUTH: Orientation.EAST,
             Orientation.EAST: Orientation.NORTH
         }
-        newOrientation = leftOrientationMapping.get(self.currentPosition.getOrientation(), "X")
-        newPosition = RoverPosition(self.currentPosition.getCoordinateInX(),
-                                    self.currentPosition.getCoordinateInY(),
+        newOrientation = leftOrientationMapping.get(self.currentPosition.orientation, "X")
+        newPosition = RoverPosition(self.currentPosition.coordinateInX,
+                                    self.currentPosition.coordinateInY,
                                     newOrientation)
         self.currentPosition = newPosition
         return newPosition
@@ -46,29 +43,29 @@ class Rover:
             Orientation.SOUTH: Orientation.WEST,
             Orientation.EAST: Orientation.SOUTH
         }
-        newOrientation = rightOrientationMapping.get(self.currentPosition.getOrientation(), "X")
-        newPosition = RoverPosition(self.currentPosition.getCoordinateInX(),
-                                    self.currentPosition.getCoordinateInY(),
+        newOrientation = rightOrientationMapping.get(self.currentPosition.orientation, "X")
+        newPosition = RoverPosition(self.currentPosition.coordinateInX,
+                                    self.currentPosition.coordinateInY,
                                     newOrientation)
         self.currentPosition = newPosition
         return newPosition
 
     def move(self):
         moveMappingTable = {
-            Orientation.NORTH: lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
-                                                     self.currentPosition.getCoordinateInY() + 1,
-                                                     self.currentPosition.getOrientation()),
-            Orientation.SOUTH: lambda: RoverPosition(self.currentPosition.getCoordinateInX(),
-                                                     self.currentPosition.getCoordinateInY() - 1,
-                                                     self.currentPosition.getOrientation()),
-            Orientation.WEST: lambda: RoverPosition(self.currentPosition.getCoordinateInX() - 1,
-                                                    self.currentPosition.getCoordinateInY(),
-                                                    self.currentPosition.getOrientation()),
-            Orientation.EAST: lambda: RoverPosition(self.currentPosition.getCoordinateInX() + 1,
-                                                    self.currentPosition.getCoordinateInY(),
-                                                    self.currentPosition.getOrientation())
+            Orientation.NORTH: lambda: RoverPosition(self.currentPosition.coordinateInX,
+                                                     self.currentPosition.coordinateInY + 1,
+                                                     self.currentPosition.orientation),
+            Orientation.SOUTH: lambda: RoverPosition(self.currentPosition.coordinateInX,
+                                                     self.currentPosition.coordinateInY - 1,
+                                                     self.currentPosition.orientation),
+            Orientation.WEST: lambda: RoverPosition(self.currentPosition.coordinateInX - 1,
+                                                    self.currentPosition.coordinateInY,
+                                                    self.currentPosition.orientation),
+            Orientation.EAST: lambda: RoverPosition(self.currentPosition.coordinateInX + 1,
+                                                    self.currentPosition.coordinateInY,
+                                                    self.currentPosition.orientation)
         }
-        newRoverPosition = moveMappingTable.get(self.currentPosition.getOrientation(),
+        newRoverPosition = moveMappingTable.get(self.currentPosition.orientation,
                                                 lambda: RoverPosition(0, 0, Orientation.SOUTH))()
         if not self.isPositionWithinPlateauArea(self.plateau, newRoverPosition):
             raise ValueError('rover cannot be driven out of plateau area')
@@ -76,7 +73,7 @@ class Rover:
         return self.currentPosition
 
     def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
-        if (position.getCoordinateInX() > plateau.getDimensionInX() or
-                position.getCoordinateInY() > plateau.getDimensionInY()):
+        if (position.coordinateInX > plateau.dimensionInX or
+                position.coordinateInY > plateau.dimensionInY):
             return False
         return True

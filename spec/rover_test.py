@@ -22,7 +22,7 @@ class Test_Rover:
         rover.processCommands(movementCommands)
         # Then
         expectedFinalPosition = '3 4 N'
-        assert rover.getCurrentPosition().toString() == expectedFinalPosition
+        assert rover.currentPosition.toString() == expectedFinalPosition
 
     def test_CannotCreateRoverIfInitialPositionOutOfPlateauArea(self):
         # Given
@@ -41,4 +41,4 @@ class Test_Rover:
         # Then
         with pytest.raises(ValueError, match='rover cannot be driven out of plateau area'):
             rover.processCommands(movementCommands)
-        assert rover.getCurrentPosition().toString() == RoverPosition(2, 3, Orientation.NORTH).toString()
+        assert rover.currentPosition.toString() == RoverPosition(2, 3, Orientation.NORTH).toString()
