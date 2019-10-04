@@ -1,4 +1,5 @@
 from typing import List
+from marsrover.plateau import Plateau
 from marsrover.position import RoverPosition
 from marsrover.orientation import Orientation
 from marsrover.movementcommand import MovementCommand
@@ -6,11 +7,11 @@ from marsrover.movementcommand import MovementCommand
 
 class Rover:
 
-    def __init__(self, plateau, initialPosition: RoverPosition):
+    def __init__(self, plateau: Plateau, initialPosition: RoverPosition):
         if not self.isPositionWithinPlateauArea(plateau, initialPosition):
             raise ValueError('rover initial position out of plateau area')
-        self.plateau = plateau
-        self.currentPosition = initialPosition
+        self.plateau: Plateau = plateau
+        self.currentPosition: RoverPosition = initialPosition
 
     def processCommands(self, commands: List[MovementCommand]):
 
@@ -22,7 +23,7 @@ class Rover:
             if command == MovementCommand.LEFT:
                 self.turnLeft()
 
-    def turnLeft(self):
+    def turnLeft(self) -> RoverPosition:
         leftOrientationMapping = {
             Orientation.NORTH: Orientation.WEST,
             Orientation.WEST: Orientation.SOUTH,
@@ -36,7 +37,7 @@ class Rover:
         self.currentPosition = newPosition
         return newPosition
 
-    def turnRight(self):
+    def turnRight(self) -> RoverPosition:
         rightOrientationMapping = {
             Orientation.NORTH: Orientation.EAST,
             Orientation.WEST: Orientation.NORTH,
@@ -50,7 +51,7 @@ class Rover:
         self.currentPosition = newPosition
         return newPosition
 
-    def move(self):
+    def move(self) -> RoverPosition:
         moveMappingTable = {
             Orientation.NORTH: lambda: RoverPosition(self.currentPosition.coordinateInX,
                                                      self.currentPosition.coordinateInY + 1,
@@ -72,7 +73,7 @@ class Rover:
         self.currentPosition = newRoverPosition
         return self.currentPosition
 
-    def isPositionWithinPlateauArea(self, plateau, position: RoverPosition):
+    def isPositionWithinPlateauArea(self, plateau: Plateau, position: RoverPosition):
         if (position.coordinateInX > plateau.dimensionInX or
                 position.coordinateInY > plateau.dimensionInY):
             return False

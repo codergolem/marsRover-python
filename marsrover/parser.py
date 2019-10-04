@@ -9,7 +9,7 @@ from marsrover.movementcommand import MovementCommand
 
 class Parser:
 
-    def parseFile(self, filePath):
+    def parseFile(self, filePath: str) -> SetOfInstructions:
         with open(filePath, 'r') as inputFile:
             plateauAsListOfStrings = inputFile.readline().split()
             if not ((len(plateauAsListOfStrings) == 2) and

@@ -1,5 +1,5 @@
 class Plateau:
 
-    def __init__(self, dimensionInX, dimensionInY):
-        self.dimensionInX = dimensionInX
-        self.dimensionInY = dimensionInY
+    def __init__(self, dimensionInX: int, dimensionInY: int):
+        self.dimensionInX: int = dimensionInX
+        self.dimensionInY: int = dimensionInY

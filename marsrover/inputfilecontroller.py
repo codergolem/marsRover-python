@@ -1,13 +1,15 @@
 from marsrover.rover import Rover
+from typing import List
+from marsrover.parser import Parser
 from marsrover.parsingerror import ParsingError
 
 
 class InputFileController:
 
     def __init__(self):
-        self.rovers = []
+        self.rovers = List[Rover]
 
-    def processFile(self, filePath, parser):
+    def processFile(self, filePath: str, parser: Parser):
         try:
             setOfInstructions = parser.parseFile(filePath)
             for instruction in setOfInstructions.roverInstructions:

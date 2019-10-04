@@ -1,10 +1,15 @@
+from marsrover.instruction import RoverInstruction
+from marsrover.plateau import Plateau
+from typing import List
+
+
 class SetOfInstructions:
 
-    def __init__(self, plateau, roverInstructions):
-        self.plateau = plateau
-        self.roverInstructions = roverInstructions
+    def __init__(self, plateau: Plateau, roverInstructions: List[RoverInstruction]):
+        self.plateau: Plateau = plateau
+        self.roverInstructions: List[RoverInstruction] = roverInstructions
 
-    def toString(self):
+    def toString(self) -> str:
         plateauAsString = str(self.plateau.dimensionInX) + ' ' + str(self.plateau.dimensionInY) + '\n'
         roverInstructionsAsStrings = []
         for instruction in self.roverInstructions:
