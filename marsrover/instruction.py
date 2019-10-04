@@ -7,4 +7,4 @@ class RoverInstruction:
 
     def __init__(self, initialPosition: RoverPosition, movementCommands: List[MovementCommand]):
         self.initialPosition: RoverPosition = initialPosition
-        self.movementCommands: List[movementCommands] = movementCommands
+        self.movementCommands: List[MovementCommand] = movementCommands

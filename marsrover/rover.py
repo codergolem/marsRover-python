@@ -30,7 +30,7 @@ class Rover:
             Orientation.SOUTH: Orientation.EAST,
             Orientation.EAST: Orientation.NORTH
         }
-        newOrientation = leftOrientationMapping.get(self.currentPosition.orientation, "X")
+        newOrientation = leftOrientationMapping.get(self.currentPosition.orientation, Orientation.NORTH)
         newPosition = RoverPosition(self.currentPosition.coordinateInX,
                                     self.currentPosition.coordinateInY,
                                     newOrientation)
@@ -44,7 +44,7 @@ class Rover:
             Orientation.SOUTH: Orientation.WEST,
             Orientation.EAST: Orientation.SOUTH
         }
-        newOrientation = rightOrientationMapping.get(self.currentPosition.orientation, "X")
+        newOrientation = rightOrientationMapping.get(self.currentPosition.orientation, Orientation.NORTH)
         newPosition = RoverPosition(self.currentPosition.coordinateInX,
                                     self.currentPosition.coordinateInY,
                                     newOrientation)
