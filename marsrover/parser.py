@@ -5,6 +5,7 @@ from marsrover.setofinstructions import SetOfInstructions
 from marsrover.orientation import Orientation
 from marsrover.parsingerror import ParsingError
 from marsrover.movementcommand import MovementCommand
+from typing import List
 import re
 
 
@@ -16,22 +17,31 @@ class Parser:
     def parseFile(self, filePath: str) -> SetOfInstructions:
         with open(filePath, 'r') as inputFile:
             plateauInputLine = inputFile.readline()
-            if not re.match(self.validPlateauInput, plateauInputLine):
-                raise ParsingError("Invalid plateau dimensions")
-            plateau = Plateau(int(plateauInputLine.split()[0]), int(plateauInputLine.split()[1]))
+            plateau = self.parsePlateauInput(plateauInputLine)
 
             roverInstructions = []
             for lineCount, line in enumerate(inputFile, 1):
                 if lineCount % 2 != 0:
-                    if not re.match(self.validRoverPosition, line):
-                        raise ParsingError("Invalid rover initial position")
-                    orientation = Orientation(line.split()[2])
-                    roverInitialPosition = RoverPosition(int(line.split()[0]),
-                                                         int(line.split()[1]),
-                                                         orientation)
+                    roverInitialPosition = self.parseInitialPosition(line)
                 else:
-                    commandsToMoveRover = [MovementCommand(command) for command in list(line.replace('\n', ''))]
-                    roverInstruction = RoverInstruction(roverInitialPosition, commandsToMoveRover)
+                    roverInstruction = RoverInstruction(roverInitialPosition, self.parseMovementCommands(line))
                     roverInstructions.append(roverInstruction)
 
         return SetOfInstructions(plateau, roverInstructions)
+
+    def parseMovementCommands(self, line: str) -> List[MovementCommand]:
+        commandsToMoveRover = [MovementCommand(command) for command in list(line.replace('\n', ''))]
+        return commandsToMoveRover
+
+    def parseInitialPosition(self, line: str) -> RoverPosition:
+        if not re.match(self.validRoverPosition, line):
+            raise ParsingError("Invalid rover initial position")
+        orientation = Orientation(line.split()[2])
+        return RoverPosition(int(line.split()[0]),
+                             int(line.split()[1]),
+                             orientation)
+
+    def parsePlateauInput(self, inputString: str) -> Plateau:
+        if not re.match(self.validPlateauInput, inputString):
+            raise ParsingError("Invalid plateau dimensions")
+        return Plateau(int(inputString.split()[0]), int(inputString.split()[1]))
