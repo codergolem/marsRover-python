@@ -8,7 +8,7 @@ from marsrover.movementcommand import MovementCommand
 class Rover:
 
     def __init__(self, plateau: Plateau, initialPosition: RoverPosition):
-        if not self.isPositionWithinPlateauArea(plateau, initialPosition):
+        if not plateau.isPositionWithinPlateauArea(initialPosition):
             raise ValueError('rover initial position out of plateau area')
         self.plateau: Plateau = plateau
         self.currentPosition: RoverPosition = initialPosition
@@ -68,13 +68,7 @@ class Rover:
         }
         newRoverPosition = moveMappingTable.get(self.currentPosition.orientation,
                                                 lambda: RoverPosition(0, 0, Orientation.SOUTH))()
-        if not self.isPositionWithinPlateauArea(self.plateau, newRoverPosition):
+        if not self.plateau.isPositionWithinPlateauArea(newRoverPosition):
             raise ValueError('rover cannot be driven out of plateau area')
         self.currentPosition = newRoverPosition
         return self.currentPosition
-
-    def isPositionWithinPlateauArea(self, plateau: Plateau, position: RoverPosition):
-        if (position.coordinateInX > plateau.dimensionInX or
-                position.coordinateInY > plateau.dimensionInY):
-            return False
-        return True
