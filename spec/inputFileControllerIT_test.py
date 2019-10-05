@@ -83,7 +83,7 @@ class Test_InputFileController:
 
         # Then
         printedOutput = capsys.readouterr().out
-        errorMessage = "'X' is not a valid Orientation\n"
+        errorMessage = "Invalid rover initial position\n"
         assert printedOutput == errorMessage
 
     def test_shouldPrintAnErrorWhenAnMovementCommandIsNotValid(self, capsys):

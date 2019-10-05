@@ -102,7 +102,7 @@ class Test_Parser:
         parser = Parser()
 
         # Then
-        with pytest.raises(ValueError, match="'X' is not a valid Orientation"):
+        with pytest.raises(ParsingError, match="Invalid rover initial position"):
             with patch('builtins.open', mock_open(read_data=mockedFileContent)):
                 parser.parseFile(filePath)
 
