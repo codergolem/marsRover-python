@@ -59,7 +59,7 @@ source /path/to/ENV/bin/activate
 Installing MarsRover
 ```
    git clone https://github.com/codergolem/marsRover-python
-   cd MarsRover
+   cd marsRover-python
    pip3 install . 
 ```
 ## How to use:
