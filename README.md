@@ -60,7 +60,7 @@ Installing MarsRover
 ```
    git clone https://github.com/codergolem/marsRover-python
    cd MarsRover
-   pip install . 
+   pip3 install . 
 ```
 ## How to use:
 ###  Running the test input
