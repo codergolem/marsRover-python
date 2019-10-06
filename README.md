@@ -51,8 +51,14 @@ Expected Output:
 
 Requirements : Python3, pip
 
+It is recommended to use virtualenv:
 ```
-   git clone RepoURL
+virtualenv /path/to/ENV/
+source /path/to/ENV/bin/activate
+```
+Installing MarsRover
+```
+   git clone https://github.com/codergolem/marsRover-python
    cd MarsRover
    pip install . 
 ```
