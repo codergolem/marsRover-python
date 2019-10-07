@@ -3,3 +3,4 @@
 marsrover/__pycache__/
 spec/__pycache__/
 .mypy_cache/
+.vscode/
