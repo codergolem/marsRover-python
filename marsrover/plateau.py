@@ -8,7 +8,5 @@ class Plateau:
         self.dimensionInY: int = dimensionInY
 
     def isPositionWithinPlateauArea(self, position: RoverPosition):
-        if (position.coordinateInX > self.dimensionInX or
-                position.coordinateInY > self.dimensionInY):
-            return False
-        return True
+        return not (position.coordinateInX > self.dimensionInX or
+                position.coordinateInY > self.dimensionInY)
