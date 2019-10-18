@@ -12,7 +12,5 @@ class SetOfInstructions:
     def toString(self) -> str:
         roverInstructionsAsStrings = []
         for instruction in self.roverInstructions:
-            movementCommandsAsString = ''.join([command.value for command in instruction.movementCommands])
-            instructionAsString = instruction.initialPosition.toString() + '\n' + movementCommandsAsString
-            roverInstructionsAsStrings.append(instructionAsString)
+            roverInstructionsAsStrings.append(instruction.toString())
         return self.plateau.toString() + '\n' + '\n'.join(roverInstructionsAsStrings)
