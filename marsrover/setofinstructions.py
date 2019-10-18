@@ -10,10 +10,9 @@ class SetOfInstructions:
         self.roverInstructions: List[RoverInstruction] = roverInstructions
 
     def toString(self) -> str:
-        plateauAsString = str(self.plateau.dimensionInX) + ' ' + str(self.plateau.dimensionInY) + '\n'
         roverInstructionsAsStrings = []
         for instruction in self.roverInstructions:
             movementCommandsAsString = ''.join([command.value for command in instruction.movementCommands])
             instructionAsString = instruction.initialPosition.toString() + '\n' + movementCommandsAsString
             roverInstructionsAsStrings.append(instructionAsString)
-        return plateauAsString + '\n'.join(roverInstructionsAsStrings)
+        return self.plateau.toString() + '\n' + '\n'.join(roverInstructionsAsStrings)

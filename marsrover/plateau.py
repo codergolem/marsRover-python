@@ -10,3 +10,6 @@ class Plateau:
     def isPositionWithinPlateauArea(self, position: RoverPosition):
         return not (position.coordinateInX > self.dimensionInX or
                 position.coordinateInY > self.dimensionInY)
+
+    def toString(self):
+        return str(self.dimensionInX) + ' ' + str(self.dimensionInY)
