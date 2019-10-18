@@ -36,12 +36,14 @@ class Parser:
     def parseInitialPosition(self, line: str) -> RoverPosition:
         if not re.match(self.validRoverPosition, line):
             raise ParsingError("Invalid rover initial position")
-        orientation = Orientation(line.split()[2])
-        return RoverPosition(int(line.split()[0]),
-                             int(line.split()[1]),
+        inputLineAsList = line.split()
+        orientation = Orientation(inputLineAsList[2])
+        return RoverPosition(int(inputLineAsList[0]),
+                             int(inputLineAsList[1]),
                              orientation)
 
     def parsePlateauInput(self, inputString: str) -> Plateau:
         if not re.match(self.validPlateauInput, inputString):
             raise ParsingError("Invalid plateau dimensions")
-        return Plateau(int(inputString.split()[0]), int(inputString.split()[1]))
+        inputStringAsList = inputString.split()
+        return Plateau(int(inputStringAsList[0]), int(inputStringAsList[1]))
